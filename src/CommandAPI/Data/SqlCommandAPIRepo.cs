@@ -10,14 +10,27 @@ namespace CommandAPI.Data
         {
             _context = context;
         }
+
+        public bool SaveChanges() {
+            return _context.SaveChanges() >= 0;
+        }
+
         public void CreateCommand(Command command)
         {
-            throw new NotImplementedException();
+            if (command == null) 
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            _context.CommandItems.Add(command);
         }
 
         public void DeleteCommand(Command command)
         {
-            throw new NotImplementedException();
+            if (command == null) 
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            _context.CommandItems.Remove(command);
         }
 
         public IEnumerable<Command> GetAllCommands()
@@ -30,14 +43,9 @@ namespace CommandAPI.Data
             return _context.CommandItems.FirstOrDefault(cmd => cmd.Id == id);
         }
 
-        public bool SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateCommand(Command command)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
